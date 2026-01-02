@@ -4,177 +4,134 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Amiineecmoii — Malware Breaker • Reverse Engineer • CTF</title>
-  <meta name="description" content="Amine el Jabri (Amiineecmoii) — malware breaker, reversing, CTF player & maker. Learn. Analyze. Break." />
+  <meta name="description" content="Amine el Jabri (Amiineecmoii) — malware breaker, reversing, CTF player & maker." />
   <meta name="theme-color" content="#0b0f14" />
-  <link rel="preload" href="assets/css/style.css" as="style" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body>
-  <canvas id="matrix" aria-hidden="true"></canvas>
+<canvas id="matrix"></canvas>
 
-  <header class="topbar">
-    <a class="brand" href="#home">
-      <span class="logo">⟐</span>
-      <span class="brand-text">Amiineecmoii</span>
-    </a>
-    <nav class="nav">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#work">Work</a>
-      <a href="#writeups">Writeups</a>
-      <a href="#contact" class="pill">Contact</a>
-    </nav>
-    <button class="menu" id="menuBtn">☰</button>
-  </header>
+<header class="topbar">
+  <a class="brand" href="#home">
+    <span class="logo">⟐</span>
+    <span>Amiineecmoii</span>
+  </a>
+  <nav class="nav">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#writeups">Writeups</a>
+    <a href="#contact" class="pill">Contact</a>
+  </nav>
+</header>
 
-  <main id="home" class="page">
+<main id="home" class="page">
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-left">
-        <div class="kicker">
-          <span class="dot"></span>
-          <span>Reverse Engineering • Malware Analysis • CTF</span>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="kicker">
+      <span class="dot"></span>
+      Reverse Engineering • Malware Analysis • CTF
+    </div>
 
-        <h1 class="headline">
-          Amine el Jabri
-          <span class="sub">aka <span class="glitch" data-text="Amiineecmoii">Amiineecmoii</span></span>
-        </h1>
+    <h1 class="headline">
+      Amine el Jabri
+      <span class="sub">aka <span class="glitch" data-text="Amiineecmoii">Amiineecmoii</span></span>
+    </h1>
 
-        <p class="lead">
-          <span class="typing" id="typing"></span><span class="caret">█</span>
-        </p>
+    <p class="lead">
+      <span id="typing"></span><span class="caret">█</span>
+    </p>
 
-        <div class="cta">
-          <a class="btn primary" href="#work">See my work</a>
-          <a class="btn ghost" href="#contact">Ping me</a>
-        </div>
+    <div class="cta">
+      <a class="btn primary" href="https://www.linkedin.com/in/aminee-eljabri-b21438328/" target="_blank">
+        See my work
+      </a>
+      <button class="btn ghost" id="pingBtn">Ping me</button>
+    </div>
 
-        <div class="chips">
-          <span class="chip">malware breaker</span>
-          <span class="chip">reversing</span>
-          <span class="chip">CTF player</span>
-          <span class="chip">CTF maker</span>
-        </div>
-      </div>
+    <div class="chips">
+      <span class="chip">malware breaker</span>
+      <span class="chip">reversing</span>
+      <span class="chip">CTF player</span>
+      <span class="chip">CTF maker</span>
+    </div>
+  </div>
 
-      <div class="hero-right">
-        <div class="terminal">
-          <div class="term-top">
-            <span class="lamp red"></span>
-            <span class="lamp yellow"></span>
-            <span class="lamp green"></span>
-            <span class="term-title">/dev/tty — session</span>
-          </div>
-          <div class="term-body">
-<pre><code><span class="muted">$</span> whoami
-<span class="accent">Amiineecmoii</span>
+  <div class="terminal">
+    <div class="term-top">
+      <span class="lamp red"></span>
+      <span class="lamp yellow"></span>
+      <span class="lamp green"></span>
+      <span class="term-title">/dev/tty — session</span>
+    </div>
+    <div class="term-body">
+<pre><code>$ whoami
+Amiineecmoii
 
-<span class="muted">$</span> motto
-<span class="accent">learn · analyze · break</span>
+$ motto
+learn · analyze · break
 
-<span class="muted">$</span> focus
-<span class="accent">reverse engineering</span>, <span class="accent">malware analysis</span>, <span class="accent">CTFs</span>
+$ focus
+reverse engineering, malware analysis, CTFs
 
-<span class="muted">$</span> status
-<span class="ok">online</span> | <span class="warn">targets: suspicious binaries</span></code></pre>
-          </div>
-        </div>
-      </div>
-    </section>
+$ status
+online | targets: suspicious binaries</code></pre>
+    </div>
+  </div>
+</section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section">
-      <h2>About</h2>
-      <div class="grid2">
-        <div class="panel">
-          <p>
-            I’m <strong>Amine el Jabri</strong>, known online as <strong>Amiineecmoii</strong>.
-            I focus on <strong>reverse engineering</strong>, <strong>malware analysis</strong>,
-            and competitive <strong>CTFs</strong>.
-          </p>
-          <p class="mono"><span class="muted">Bio:</span> learn, analyze, break.</p>
-        </div>
+<!-- WRITEUPS -->
+<section id="writeups" class="section">
+<h2>Writeups</h2>
 
-        <div class="panel">
-          <h3 class="panel-title">What I do</h3>
-          <ul class="list">
-            <li>▸ Malware analysis & unpacking</li>
-            <li>▸ Reverse binaries (ELF / PE / APK)</li>
-            <li>▸ Build & solve CTF challenges</li>
-            <li>▸ Publish technical writeups</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<div class="writeups">
 
-    <!-- WRITEUPS -->
-    <section id="writeups" class="section">
-      <h2>Writeups</h2>
+<a class="w" href="https://github.com/Amiineecmoii/eleonoras-writeup" target="_blank">
+  <div class="w-title">[RE] Nexus CTF — Eleonoras (1 Solve)</div>
+  <div class="w-sub">reverse engineering • hard • single solve</div>
+</a>
 
-      <div class="panel">
-        <div class="writeups">
+<a class="w" href="https://github.com/Amiineecmoii/HTB-University-CTF-2025" target="_blank">
+  <div class="w-title">[CTF] Hack The Box — University CTF 2025</div>
+  <div class="w-sub">team competition • university edition</div>
+</a>
 
-          <a class="w" href="https://github.com/Amiineecmoii/eleonoras-writeup" target="_blank">
-            <div class="w-title">[RE] Nexus CTF — Eleonoras (1 Solve)</div>
-            <div class="w-sub">reverse engineering • hard • single solve</div>
-          </a>
+<a class="w" href="https://github.com/Amiineecmoii/FlagY-writeups" target="_blank">
+  <div class="w-title">[RE] FlagY Platform — Reverse Engineering Writeups</div>
+  <div class="w-sub">crackmes • binaries • reversing</div>
+</a>
 
-          <a class="w" href="https://github.com/Amiineecmoii/HTB-University-CTF-2025" target="_blank">
-            <div class="w-title">[CTF] Hack The Box — University CTF 2025</div>
-            <div class="w-sub">team competition • university edition</div>
-          </a>
+</div>
+</section>
 
-          <a class="w" href="https://github.com/Amiineecmoii/FlagY-writeups" target="_blank">
-            <div class="w-title">[RE] FlagY Platform — Reverse Engineering Writeups</div>
-            <div class="w-sub">crackmes • binaries • reversing</div>
-          </a>
+<!-- CONTACT -->
+<section id="contact" class="section">
+<h2>Contact</h2>
 
-        </div>
-      </div>
-    </section>
+<div class="contact">
+  <a class="contact-item" href="https://github.com/Amiineecmoii" target="_blank">
+    <span>GitHub</span><span>Amiineecmoii</span>
+  </a>
+  <a class="contact-item" href="https://www.linkedin.com/in/aminee-eljabri-b21438328/" target="_blank">
+    <span>LinkedIn</span><span>Amine el Jabri</span>
+  </a>
+  <a class="contact-item" href="https://www.instagram.com/amiineecmoi/" target="_blank">
+    <span>Instagram</span><span>@amiineecmoi</span>
+  </a>
+  <a class="contact-item" href="https://flagyard.com/profile/amiineecmoi" target="_blank">
+    <span>FlagYard</span><span>Profile</span>
+  </a>
+</div>
+</section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <h2>Contact</h2>
-      <div class="grid2">
-        <div class="panel">
-          <div class="contact">
-            <a class="contact-item" href="https://github.com/Amiineecmoii" target="_blank">
-              <span class="contact-k">GitHub</span>
-              <span class="contact-v">Amiineecmoii</span>
-            </a>
-            <a class="contact-item" href="https://www.linkedin.com/in/aminee-eljabri-b21438328/" target="_blank">
-              <span class="contact-k">LinkedIn</span>
-              <span class="contact-v">Amine el Jabri</span>
-            </a>
-            <a class="contact-item" href="https://www.instagram.com/amiineecmoi/" target="_blank">
-              <span class="contact-k">Instagram</span>
-              <span class="contact-v">@amiineecmoi</span>
-            </a>
-            <a class="contact-item" href="https://flagyard.com/profile/amiineecmoi" target="_blank">
-              <span class="contact-k">FlagYard</span>
-              <span class="contact-v">Profile</span>
-            </a>
-          </div>
-        </div>
+<footer class="footer">
+© <span id="year"></span> Amiineecmoii
+</footer>
 
-        <div class="panel">
-          <div class="quote">
-            <div class="quote-mark">“</div>
-            <div class="quote-text">learn · analyze · break</div>
-          </div>
-        </div>
-      </div>
-    </section>
+</main>
 
-    <footer class="footer">
-      <div>© <span id="year"></span> Amiineecmoii</div>
-    </footer>
-  </main>
-
-  <script src="assets/js/script.js"></script>
+<script src="assets/js/script.js"></script>
 </body>
 </html>
