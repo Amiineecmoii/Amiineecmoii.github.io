@@ -329,14 +329,49 @@ strong{color:var(--fg)}
 /* ======================================================
    Footer
 ====================================================== */
+/* ======================================================
+   Footer — FINAL CLEAN VERSION
+====================================================== */
 .footer{
+  position:relative;
   margin-top:80px;
-  padding-top:20px;
+  padding:22px 20px 10px;
   border-top:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
   color:var(--muted);
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
 }
+
+.footer-left{
+  justify-self:start;
+  opacity:.85;
+}
+
+.footer-center{
+  justify-self:center;
+  font-weight:600;
+  letter-spacing:.5px;
+}
+
+.footer-right{
+  justify-self:end;
+  opacity:.85;
+}
+
+/* Mobile safety */
+@media (max-width:600px){
+  .footer{
+    grid-template-columns:1fr;
+    gap:6px;
+    text-align:center;
+  }
+  .footer-left,
+  .footer-right{
+    justify-self:center;
+  }
+}
+
 
 /* ======================================================
    Mobile
