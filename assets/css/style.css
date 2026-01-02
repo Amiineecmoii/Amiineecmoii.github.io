@@ -41,9 +41,11 @@ strong{color:var(--fg)}
 #matrix{
   position:fixed;
   inset:0;
-  z-index:-1;
-  opacity:.18;
+  z-index:-2; /* push it LOWER */
+  opacity:.16;
+  pointer-events:none;
 }
+
 
 /* ======================================================
    Topbar
