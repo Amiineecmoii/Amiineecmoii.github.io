@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amiineecmoii — Malware Breaker • Reverse Engineer • CTF</title>
+  <meta name="description" content="Amine el Jabri (Amiineecmoii) — malware breaker, reversing, CTF player & maker. Learn. Analyze. Break." />
+  <meta name="theme-color" content="#0b0f14" />
+  <link rel="preload" href="assets/css/style.css" as="style" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <canvas id="matrix" aria-hidden="true"></canvas>
+
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Go to top">
+      <span class="logo">⟐</span>
+      <span class="brand-text">Amiineecmoii</span>
+    </a>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#writeups">Writeups</a>
+      <a href="#contact" class="pill">Contact</a>
+    </nav>
+    <button class="menu" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main id="home" class="page">
+    <section class="hero">
+      <div class="hero-left">
+        <div class="kicker">
+          <span class="dot"></span>
+          <span>Reverse Engineering • Malware Analysis • CTF</span>
+        </div>
+
+        <h1 class="headline">
+          Amine el Jabri
+          <span class="sub">aka <span class="glitch" data-text="Amiineecmoii">Amiineecmoii</span></span>
+        </h1>
+
+        <p class="lead">
+          <span class="typing" id="typing"></span><span class="caret" aria-hidden="true">█</span>
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="#work">See my work</a>
+          <a class="btn ghost" href="#contact">Ping me</a>
+        </div>
+
+        <div class="chips" aria-label="Quick tags">
+          <span class="chip">malware breaker</span>
+          <span class="chip">reversing</span>
+          <span class="chip">CTF player</span>
+          <span class="chip">CTF maker</span>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="terminal">
+          <div class="term-top">
+            <span class="lamp red"></span><span class="lamp yellow"></span><span class="lamp green"></span>
+            <span class="term-title">/dev/tty — session</span>
+          </div>
+          <div class="term-body" id="term">
+            <pre><code><span class="muted">$</span> whoami
+<span class="accent">Amiineecmoii</span>
+
+<span class="muted">$</span> motto
+<span class="accent">learn · analyze · break</span>
+
+<span class="muted">$</span> focus
+<span class="accent">reverse engineering</span>, <span class="accent">malware analysis</span>, <span class="accent">CTFs</span>
+
+<span class="muted">$</span> status
+<span class="ok">online</span> <span class="muted">|</span> <span class="warn">targets: suspicious binaries</span></code></pre>
+          </div>
+        </div>
+
+        <div class="mini-cards">
+          <div class="card">
+            <div class="card-title">Now</div>
+            <div class="card-body">Breaking malware samples & building CTF challenges.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Next</div>
+            <div class="card-body">Publishing writeups, tooling, and lab notes.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2>About</h2>
+      <div class="grid2">
+        <div class="panel">
+          <p>
+            I’m <strong>Amine el Jabri</strong>, known online as <strong>Amiineecmoii</strong>.
+            I spend my time on <strong>reverse engineering</strong>, <strong>malware analysis</strong>,
+            and <strong>CTFs</strong> — both solving and creating challenges.
+          </p>
+          <p class="mono">
+            <span class="muted">Bio:</span> learn, analyze, break.
+          </p>
+          <div class="badges">
+            <span class="badge">DFIR</span>
+            <span class="badge">RE</span>
+            <span class="badge">Crypto</span>
+            <span class="badge">Web</span>
+            <span class="badge">Pwn</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-title">What I do</h3>
+          <ul class="list">
+            <li><span class="bullet">▸</span> Deobfuscate, unpack, and analyze malware behavior.</li>
+            <li><span class="bullet">▸</span> Reverse binaries (ELF/PE/APK), patch checks, recover secrets.</li>
+            <li><span class="bullet">▸</span> Build CTF challenges: reverse, forensics, crypto, and web.</li>
+            <li><span class="bullet">▸</span> Document findings into clean writeups & tooling.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div class="skill">
+          <div class="skill-name">Reverse Engineering</div>
+          <div class="skill-desc">Static/dynamic analysis, patching, anti-debug, devirtualization basics.</div>
+          <div class="tags">
+            <span class="tag">Ghidra</span><span class="tag">IDA</span><span class="tag">GDB</span><span class="tag">radare2</span>
+          </div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-name">Malware Analysis</div>
+          <div class="skill-desc">Behavior analysis, persistence, IOC extraction, unpacking, sandboxing.</div>
+          <div class="tags">
+            <span class="tag">Wireshark</span><span class="tag">ProcMon</span><span class="tag">YARA</span><span class="tag">Sysmon</span>
+          </div>
+        </div>
+
+        <div class="skill">
+          <div class="skill-name">CTFs</div>
+          <div class="skill-desc">Player + maker. I like hard puzzles with clean solutions.</div>
+          <div class="tags">
+            <span class="tag">Forensics</span><span class="tag">Crypto</span><span class="tag">Web</span><span class="tag">Pwn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <div class="note-title">Want this more personal?</div>
+        <div class="note-body">
+          Tell me your tools/languages/ranks and I’ll replace every placeholder with your real data.
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section">
+      <h2>Featured</h2>
+      <div class="cards">
+        <article class="work">
+          <h3>Malware Breaker Lab</h3>
+          <p>Notes + scripts for unpacking, decoding configs, and extracting indicators.</p>
+          <div class="work-meta">
+            <span class="pill small">reverse</span>
+            <span class="pill small">malware</span>
+            <span class="pill small">tooling</span>
+          </div>
+          <a class="work-link" href="#contact">Ask for a demo →</a>
+        </article>
+
+        <article class="work">
+          <h3>CTF Challenge Pack</h3>
+          <p>Original challenges (reverse/forensics/crypto) with clean intended solves.</p>
+          <div class="work-meta">
+            <span class="pill small">CTF</span>
+            <span class="pill small">design</span>
+            <span class="pill small">writeups</span>
+          </div>
+          <a class="work-link" href="#writeups">See writeups →</a>
+        </article>
+
+        <article class="work">
+          <h3>Traffic Whispers</h3>
+          <p>PCAP + “audio in the noise” style forensic pipeline (decode → extract → reveal).</p>
+          <div class="work-meta">
+            <span class="pill small">DFIR</span>
+            <span class="pill small">pcap</span>
+            <span class="pill small">stego</span>
+          </div>
+          <a class="work-link" href="#writeups">Pipeline notes →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="writeups" class="section">
+      <h2>Writeups</h2>
+
+      <div class="panel">
+        <p>
+          Add your writeups as separate markdown pages later, or just link to your GitHub posts.
+          For now, here are placeholders.
+        </p>
+
+        <div class="writeups">
+          <a class="w" href="#" onclick="return false;">
+            <div class="w-title">[RE] Unpacking & recovering strings from a protected binary</div>
+            <div class="w-sub">notes • tooling • patterns</div>
+          </a>
+          <a class="w" href="#" onclick="return false;">
+            <div class="w-title">[DFIR] PCAP triage: DNS/HTTP/ICMP + hidden payload extraction</div>
+            <div class="w-sub">pcap • carve • decode</div>
+          </a>
+          <a class="w" href="#" onclick="return false;">
+            <div class="w-title">[Crypto] XOR + frequency tricks: fast win conditions</div>
+            <div class="w-sub">analysis • solver template</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="grid2">
+        <div class="panel">
+          <h3 class="panel-title">Drop a message</h3>
+          <p class="muted">
+            Replace the links below with your real profiles (GitHub, LinkedIn, Discord).
+          </p>
+
+          <div class="contact">
+            <a class="contact-item" href="https://github.com/Amiineecmoii" target="_blank">
+              <span class="contact-k">GitHub</span>
+              <span class="contact-v">github.com/Amiineecmoii</span>
+            </a>
+            <a class="contact-item" href="https://www.linkedin.com/in/aminee-eljabri-b21438328/" target="_blank">
+              <span class="contact-k">LinkedIn</span>
+              <span class="contact-v">linkedin.com/in/aminee-eljabri</span>
+            </a>
+            <a class="contact-item" href="https://www.instagram.com/amiineecmoi/" target="_blank">
+              <span class="contact-k">Instagram</span>
+              <span class="contact-v">@amiineecmoi</span>
+            </a>
+            <a class="contact-item" href="https://flagyard.com/profile/amiineecmoi" target="_blank">
+              <span class="contact-k">FlagYard</span>
+              <span class="contact-v">flagyard.com/profile/amiineecmoi</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-title">One-liner</h3>
+          <div class="quote">
+            <div class="quote-mark">“</div>
+            <div class="quote-text">learn · analyze · break</div>
+          </div>
+
+          <div class="mono small muted">
+            Tip: You can host this on GitHub Pages in minutes.
+            Upload these files to <strong>USERNAME.github.io</strong> and you’re done.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© <span id="year"></span> Amiineecmoii • Built for GitHub Pages</div>
+      <div class="footer-links">
+        <a href="#home">Top</a>
+        <span class="muted">|</span>
+        <a href="#contact">Contact</a>
+      </div>
+    </footer>
+  </main>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-inner">
+      <a href="#about" class="drawer-link">About</a>
+      <a href="#skills" class="drawer-link">Skills</a>
+      <a href="#work" class="drawer-link">Work</a>
+      <a href="#writeups" class="drawer-link">Writeups</a>
+      <a href="#contact" class="drawer-link">Contact</a>
+      <button class="btn ghost wide" id="closeDrawer">Close</button>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
