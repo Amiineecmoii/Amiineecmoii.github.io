@@ -329,43 +329,60 @@ strong{color:var(--fg)}
 .contact-v{font-size:.95rem;color:var(--muted)}
 
 /* ======================================================
-   Footer — FINAL HARD FIX (matrix-safe)
+   Footer — MATRIX HARD BLOCK (FINAL FIX)
 ====================================================== */
+
 .footer{
-  position:relative;
-  z-index:5; /* ABOVE matrix */
-  margin-top:80px;
-  padding:22px 20px 14px;
+  position: relative;
+  z-index: 10;
+  margin-top: 80px;
+  padding: 22px 20px 14px;
 
-  background:
-    linear-gradient(180deg,
-      rgba(11,15,20,.85),
-      rgba(11,15,20,.95)
-    );
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
 
-  border-top:1px solid var(--line);
-  color:var(--muted);
-
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
 }
 
+/* 🔥 THIS IS THE KEY PART */
+.footer::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0b0f14; /* SOLID, NOT TRANSPARENT */
+  z-index: -1;
+}
+
+/* Footer columns */
 .footer-left{
-  justify-self:start;
-  opacity:.85;
+  justify-self: start;
 }
 
 .footer-center{
-  justify-self:center;
-  font-weight:600;
-  letter-spacing:.5px;
+  justify-self: center;
+  font-weight: 600;
+  letter-spacing: .5px;
 }
 
 .footer-right{
-  justify-self:end;
-  opacity:.85;
+  justify-self: end;
 }
+
+/* Mobile */
+@media (max-width:600px){
+  .footer{
+    grid-template-columns: 1fr;
+    gap: 6px;
+    text-align: center;
+  }
+  .footer-left,
+  .footer-right{
+    justify-self: center;
+  }
+}
+
 
 /* Mobile */
 @media (max-width:600px){
