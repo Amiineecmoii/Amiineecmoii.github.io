@@ -1,21 +1,43 @@
+/* ======================================================
+   Amiineecmoii — Hacker Portfolio (FIXED & STABLE)
+====================================================== */
+
 :root{
   --bg:#0b0f14;
+  --bg2:#0f1621;
   --fg:#e8f0ff;
   --muted:#9fb0c8;
+  --line:rgba(255,255,255,.12);
   --accent:#7cffb2;
   --accent2:#a78bfa;
-  --line:rgba(255,255,255,.12);
-  --shadow:0 18px 60px rgba(0,0,0,.45);
+  --ok:#2ee59d;
+  --warn:#ffd166;
+  --shadow:0 20px 60px rgba(0,0,0,.45);
+  --radius:18px;
 }
 
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
 body{
   margin:0;
-  font-family:system-ui;
-  background:#0b0f14;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+  background:
+    radial-gradient(1200px 800px at 20% 10%, rgba(124,255,178,.12), transparent 55%),
+    radial-gradient(900px 700px at 80% 20%, rgba(167,139,250,.12), transparent 55%),
+    linear-gradient(180deg, var(--bg), #070a0e);
   color:var(--fg);
+  overflow-x:hidden;
 }
 
+a{color:inherit;text-decoration:none}
+strong{color:var(--fg)}
+.muted{color:var(--muted)}
+.mono{font-family:ui-monospace,monospace}
+
+/* ======================================================
+   Matrix canvas
+====================================================== */
 #matrix{
   position:fixed;
   inset:0;
@@ -23,43 +45,145 @@ body{
   opacity:.18;
 }
 
+/* ======================================================
+   Topbar
+====================================================== */
 .topbar{
   position:sticky;
   top:0;
-  padding:14px 18px;
-  background:rgba(11,15,20,.6);
-  backdrop-filter:blur(10px);
+  z-index:10;
   display:flex;
   justify-content:space-between;
+  align-items:center;
+  padding:14px 20px;
+  backdrop-filter:blur(10px);
+  background:rgba(11,15,20,.65);
   border-bottom:1px solid var(--line);
 }
 
-.page{max-width:1100px;margin:auto;padding:24px}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+}
 
+.logo{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:linear-gradient(135deg, rgba(124,255,178,.2), rgba(167,139,250,.2));
+  border:1px solid var(--line);
+}
+
+.nav{
+  display:flex;
+  gap:16px;
+}
+
+.nav a{
+  padding:8px 10px;
+  border-radius:12px;
+  color:var(--muted);
+}
+.nav a:hover{
+  background:rgba(255,255,255,.06);
+  color:var(--fg);
+}
+
+.pill{
+  background:rgba(124,255,178,.14);
+  border:1px solid rgba(124,255,178,.35);
+  color:var(--fg)!important;
+}
+
+.menu{
+  display:none;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  color:var(--fg);
+  border-radius:12px;
+  padding:10px 12px;
+}
+
+/* ======================================================
+   Layout
+====================================================== */
+.page{
+  max-width:1100px;
+  margin:auto;
+  padding:28px 20px 90px;
+}
+
+.section{
+  margin-top:80px;
+}
+
+.section h2{
+  font-size:1.6rem;
+  margin-bottom:20px;
+}
+
+/* ======================================================
+   Hero (FIXED spacing)
+====================================================== */
 .hero{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
+  grid-template-columns:1.1fr .9fr;
+  gap:30px;
+  padding-top:40px;
 }
 
 .kicker{
   display:inline-flex;
-  gap:8px;
-  padding:8px 12px;
-  border:1px solid var(--line);
+  gap:10px;
+  align-items:center;
+  padding:8px 14px;
   border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
   color:var(--muted);
 }
 
-.headline{font-size:3rem;margin:14px 0}
-.sub{color:var(--muted)}
-
-.lead{
-  min-height:1.6em;
-  margin:18px 0 22px;
+.kicker .dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 16px rgba(124,255,178,.6);
 }
 
-.cta{margin-bottom:18px}
+.headline{
+  font-size:clamp(2.2rem,4vw,3.2rem);
+  margin:14px 0 10px;
+  line-height:1.05;
+}
+
+.sub{
+  display:block;
+  font-size:1.25rem;
+  color:var(--muted);
+}
+
+.lead{
+  margin:18px 0 22px;
+  font-size:1.05rem;
+  min-height:1.6em; /* prevents jump */
+}
+
+.caret{
+  animation:blink 1s steps(1,end) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+
+.cta{
+  display:flex;
+  gap:12px;
+  margin-bottom:18px;
+}
+
 .btn{
   padding:10px 16px;
   border-radius:14px;
@@ -67,28 +191,81 @@ body{
   background:rgba(255,255,255,.05);
   color:var(--fg);
 }
-.btn.primary{background:linear-gradient(135deg,rgba(124,255,178,.25),rgba(167,139,250,.25))}
-.btn:hover{background:rgba(255,255,255,.1)}
+.btn:hover{background:rgba(255,255,255,.08)}
 
-.chips{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+.btn.primary{
+  background:linear-gradient(135deg, rgba(124,255,178,.2), rgba(167,139,250,.2));
+}
+
+.chips{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
 .chip{
   padding:8px 12px;
   border-radius:999px;
-  background:rgba(0,0,0,.35);
   border:1px solid rgba(255,255,255,.18);
+  background:rgba(0,0,0,.35);
+  color:var(--fg);
 }
 
+/* ======================================================
+   Terminal
+====================================================== */
 .terminal{
+  border-radius:var(--radius);
   border:1px solid var(--line);
-  border-radius:18px;
-  background:rgba(0,0,0,.45);
+  background:rgba(6,8,12,.6);
+  box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
-.term-top{padding:10px;border-bottom:1px solid var(--line)}
-.term-body{padding:14px;font-family:monospace}
+.term-top{
+  display:flex;
+  gap:8px;
+  padding:10px;
+  border-bottom:1px solid var(--line);
+}
 
-.section{margin-top:80px}
+.lamp{width:10px;height:10px;border-radius:50%}
+.lamp.red{background:#ff4d6d}
+.lamp.yellow{background:#ffd166}
+.lamp.green{background:#2ee59d}
 
+.term-body{
+  padding:14px;
+  font-family:ui-monospace,monospace;
+  font-size:.95rem;
+  line-height:1.5;
+}
+
+.accent{color:var(--accent)}
+.ok{color:var(--ok)}
+.warn{color:var(--warn)}
+
+/* ======================================================
+   Panels
+====================================================== */
+.grid2{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px;
+}
+
+.panel{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+
+/* ======================================================
+   Writeups — ONE CLICKABLE CARD EACH (FIXED)
+====================================================== */
 .writeups{
   display:flex;
   flex-direction:column;
@@ -99,20 +276,32 @@ body{
   display:block;
   padding:18px 20px;
   border-radius:18px;
-  border:1px solid var(--line);
   background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
   box-shadow:var(--shadow);
-  transition:.15s;
+  cursor:pointer;
+  transition:.15s ease;
 }
 
 .w:hover{
   transform:translateY(-2px);
-  background:rgba(124,255,178,.12);
+  background:rgba(124,255,178,.1);
+  border-color:rgba(124,255,178,.55);
 }
 
-.w-title{font-weight:800}
-.w-sub{color:var(--muted)}
+.w-title{
+  font-weight:800;
+  margin-bottom:6px;
+}
 
+.w-sub{
+  font-size:.95rem;
+  color:var(--muted);
+}
+
+/* ======================================================
+   Contact (FIXED)
+====================================================== */
 .contact{
   display:flex;
   flex-direction:column;
@@ -123,9 +312,46 @@ body{
   display:flex;
   justify-content:space-between;
   padding:14px 18px;
-  border-radius:16px;
-  border:1px solid var(--line);
+  border-radius:18px;
   background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  transition:.15s ease;
 }
 
-.footer{margin-top:60px;color:var(--muted)}
+.contact-item:hover{
+  background:rgba(124,255,178,.1);
+  border-color:rgba(124,255,178,.55);
+}
+
+.contact-k{font-weight:600}
+.contact-v{font-size:.95rem;color:var(--muted)}
+
+/* ======================================================
+   Footer
+====================================================== */
+.footer{
+  margin-top:80px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+}
+
+/* ======================================================
+   Mobile
+====================================================== */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .nav{display:none}
+  .menu{display:inline-flex}
+}
+
+/* ======================================================
+   Ping emoji animation
+====================================================== */
+@keyframes pingFloat{
+  from{opacity:1;transform:translateY(0) scale(1)}
+  to{opacity:0;transform:translateY(-120px) scale(1.4)}
+}
