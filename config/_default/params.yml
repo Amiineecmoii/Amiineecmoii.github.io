@@ -498,7 +498,6 @@ firework:
 article_copyright:
   enable: false
   content:
-author: Amiineecmoii
     link: true
     title: false
     date: false
