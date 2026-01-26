@@ -5,39 +5,46 @@
   <title>Amiineecmoii | Security Researcher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <meta name="description" content="Amiineecmoii — Reverse Engineering & Malware Analysis">
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="hero-bg"></div>
-
-  <div class="container hero-content">
-    <p class="hero-kicker">Hi, my name is</p>
-    <h1 class="hero-title">Amiineecmoii</h1>
-    <h2 class="hero-subtitle">Reverse Engineering & Malware Analysis</h2>
-
-    <p class="hero-desc">
-      Security researcher focused on binary analysis and digital forensics.
-      CTF player with <span>Hack@Sec</span>.
-    </p>
-
-    <div class="hero-buttons">
-      <a href="#writeups" class="hero-btn primary">Read Posts →</a>
-      <a href="#achievements" class="hero-btn ghost">🏆 Achievements</a>
-    </div>
+<!-- NAVBAR -->
+<header class="nav">
+  <div class="nav-inner container">
+    <div class="logo">Amiineecmoii<span>/security</span></div>
+    <nav>
+      <a href="#writeups">Writeups</a>
+      <a href="#achievements">Achievements</a>
+      <a href="https://ctftime.org/team/135426/" target="_blank">CTFtime</a>
+    </nav>
   </div>
 </header>
 
+<!-- HERO -->
+<section class="hero container fade">
+  <p class="kicker">Hi, my name is</p>
+  <h1>Amiineecmoii</h1>
+  <h2>Reverse Engineering & Malware Analysis</h2>
+
+  <p class="desc">
+    Security researcher focused on binary analysis and digital forensics.
+    CTF player with <a href="https://ctftime.org/team/135426/" target="_blank">Hack@Sec</a>.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#writeups" class="btn primary">Read posts →</a>
+    <a href="#achievements" class="btn">🏆 Achievements</a>
+  </div>
+</section>
 
 <!-- WRITEUPS -->
-<section id="writeups" class="container section">
+<section id="writeups" class="section container fade">
+
   <div class="section-head">
     <h3>WRITEUPS</h3>
-    <a href="#" class="view-all">view all →</a>
+    <a class="view-all" href="#">view all →</a>
   </div>
 
   <input class="search" placeholder="Search writeups by title, category, or tags...">
@@ -47,65 +54,71 @@
     <a class="post-card" href="#">
       <div class="post-img nexus"></div>
       <div class="post-body">
-        <small>CTF Writeup</small>
-        <h4>NexusCTF — Reversing</h4>
+        <span class="post-type">CTF WRITEUP</span>
+        <h3>NexusCTF — Reversing</h3>
         <p>
-          Deep reverse engineering writeup. This challenge was first-blooded
+          Deep reverse engineering writeup from NexusCTF. This challenge was first-blooded
           by me and remained exclusively solved by me. Dive deep into reversing,
-          obfuscation, and low-level binary analysis.
+          obfuscation, and low-level analysis.
         </p>
+        <div class="tags">
+          <span>ctf</span><span>reverse</span><span>malware</span>
+        </div>
       </div>
     </a>
 
     <a class="post-card" href="#">
       <div class="post-img flagyard"></div>
       <div class="post-body">
-        <small>CTF Writeups</small>
-        <h4>FlagYard — Reversing & DFIR</h4>
+        <span class="post-type">CTF WRITEUPS</span>
+        <h3>FlagYard — Reversing & DFIR</h3>
         <p>
-          Reversing and DFIR writeups from FlagYard challenges.
-          Explore memory forensics, malware artifacts, and deep reversing techniques.
+          Reversing and DFIR writeups from FlagYard challenges. Explore memory forensics,
+          malware artifacts, and deep reversing techniques. Have fun reading them.
         </p>
+        <div class="tags">
+          <span>ctf</span><span>reverse</span><span>dfir</span>
+        </div>
       </div>
     </a>
 
     <a class="post-card" href="#">
       <div class="post-img knight"></div>
       <div class="post-body">
-        <small>CTF Writeups</small>
-        <h4>KnightCTF — Writeups</h4>
+        <span class="post-type">CTF WRITEUPS</span>
+        <h3>KnightCTF — Writeups</h3>
         <p>
           Technical writeups and structured breakdowns of KnightCTF challenges
           covering reverse engineering, crypto, and exploitation.
         </p>
+        <div class="tags">
+          <span>ctf</span><span>reverse</span><span>crypto</span>
+        </div>
       </div>
     </a>
 
   </div>
 </section>
 
-
 <!-- ACHIEVEMENTS -->
-<section id="achievements" class="container section">
+<section id="achievements" class="section container fade">
+
   <div class="section-head">
     <h3>ACHIEVEMENTS</h3>
   </div>
 
   <div class="grid">
-
-    <div class="card"><h2>1st</h2><p>VoidBox CTF<br><span>2025</span></p></div>
-    <div class="card"><h2>8th</h2><p>BuckeyeCTF<br><span>2025</span></p></div>
-    <div class="card"><h2>9th</h2><p>0xL4ugh CTF<br><span>2025</span></p></div>
-    <div class="card"><h2>8th</h2><p>OdysseyCTF Quals<br><span>2024</span></p></div>
-    <div class="card"><h2>Top 65</h2><p>FlagYard Platform<br><span>Global</span></p></div>
-
+    <div class="card"><div class="place">1st</div><div class="event">VoidBox CTF</div><div class="date">2025</div></div>
+    <div class="card"><div class="place">8th</div><div class="event">BuckeyeCTF</div><div class="date">2025</div></div>
+    <div class="card"><div class="place">9th</div><div class="event">0xL4ugh CTF</div><div class="date">2025</div></div>
+    <div class="card"><div class="place">8th</div><div class="event">OdysseyCTF Quals</div><div class="date">2024</div></div>
+    <div class="card"><div class="place">Top 65</div><div class="event">FlagYard Platform</div><div class="date">Global ranking</div></div>
   </div>
+
 </section>
 
+<footer>© 2026 Amiineecmoii — Security Research</footer>
 
-<footer>
-  © 2026 Amiineecmoii — Security Research
-</footer>
-
+<script src="./assets/js/script.js"></script>
 </body>
 </html>
