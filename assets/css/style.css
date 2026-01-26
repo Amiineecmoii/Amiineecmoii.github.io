@@ -1,109 +1,124 @@
-:root {
-  --bg:#050505;
-  --fg:#ffffff;
-  --muted:rgba(255,255,255,.55);
-  --line:rgba(255,255,255,.1);
-  --glow:rgba(255,255,255,.12);
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Amiineecmoii | Security Researcher</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-*{box-sizing:border-box}
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
 
-html,body{
-  margin:0;
-  background:var(--bg);
-  color:var(--fg);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-}
+<body>
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at center,rgba(255,255,255,.07),transparent 60%),
-    radial-gradient(rgba(255,255,255,.15) 1px,transparent 1px);
-  background-size:auto,22px 22px;
-  opacity:.35;
-  pointer-events:none;
-}
+<!-- NAVBAR -->
+<header class="nav">
+  <div class="nav-inner container">
+    <div class="logo">Amiineecmoii<span>/security</span></div>
+    <nav>
+      <a href="#writeups">Writeups</a>
+      <a href="#achievements">Achievements</a>
+      <a href="https://ctftime.org/team/135426/" target="_blank">CTFtime</a>
+    </nav>
+  </div>
+</header>
 
-.container{max-width:1150px;margin:auto;padding:0 26px}
-.section{padding:110px 0}
+<!-- HERO -->
+<section class="hero container fade">
+  <p class="kicker">Hi, my name is</p>
+  <h1>Amiineecmoii</h1>
+  <h2>Reverse Engineering & Malware Analysis</h2>
 
-/* ---------------- HERO ---------------- */
+  <p class="desc">
+    Security researcher focused on binary analysis and digital forensics.
+    CTF player with <a href="https://ctftime.org/team/135426/" target="_blank">Hack@Sec</a>.
+  </p>
 
-.hero{min-height:92vh;display:flex;align-items:center;position:relative}
-.hero-bg{
-  position:absolute;inset:0;
-  background:radial-gradient(circle at center,rgba(255,255,255,.1),transparent 55%);
-  opacity:.6;pointer-events:none
-}
+  <div class="hero-btns">
+    <a href="#writeups" class="btn primary">Read posts →</a>
+    <a href="#achievements" class="btn">🏆 Achievements</a>
+  </div>
+</section>
 
-.hero-content{max-width:720px;position:relative}
+<!-- WRITEUPS -->
+<section id="writeups" class="section container fade">
 
-.hero-kicker{font-family:monospace;color:var(--muted);letter-spacing:2px}
-.hero-title{font-size:clamp(3.8rem,8vw,6.3rem);margin:12px 0;font-weight:900}
-.hero-subtitle{font-size:1.6rem;color:var(--muted)}
-.hero-desc{max-width:560px;line-height:1.8;color:var(--muted);margin-top:22px}
+  <div class="section-head">
+    <h3>WRITEUPS</h3>
+    <a class="view-all" href="#">view all →</a>
+  </div>
 
-.hero-buttons{margin-top:36px;display:flex;gap:14px}
+  <input class="search" placeholder="Search writeups by title, category, or tags...">
 
-.hero-btn{
-  padding:14px 22px;border-radius:14px;
-  border:1px solid var(--line);
-  color:white;text-decoration:none;font-weight:600
-}
-.hero-btn.primary{background:white;color:black;border:none}
-.hero-btn:hover{transform:translateY(-2px);box-shadow:0 10px 40px black}
+  <div class="posts-grid">
 
-/* ---------------- WRITEUPS ---------------- */
+    <a class="post-card" href="#">
+      <div class="post-img nexus"></div>
+      <div class="post-body">
+        <span class="post-type">CTF WRITEUP</span>
+        <h3>NexusCTF — Reversing</h3>
+        <p>
+          Deep reverse engineering writeup from NexusCTF. This challenge was first-blooded
+          by me and remained exclusively solved by me. Dive deep into reversing,
+          obfuscation, and low-level analysis.
+        </p>
+        <div class="tags">
+          <span>ctf</span><span>reverse</span><span>malware</span>
+        </div>
+      </div>
+    </a>
 
-.section-head{display:flex;align-items:center;gap:16px;margin-bottom:26px}
-.section-head h3{font-family:monospace;letter-spacing:2px}
-.section-head::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
-.view-all{color:var(--muted);font-size:.85rem;text-decoration:none}
+    <a class="post-card" href="#">
+      <div class="post-img flagyard"></div>
+      <div class="post-body">
+        <span class="post-type">CTF WRITEUPS</span>
+        <h3>FlagYard — Reversing & DFIR</h3>
+        <p>
+          Reversing and DFIR writeups from FlagYard challenges. Explore memory forensics,
+          malware artifacts, and deep reversing techniques. Have fun reading them.
+        </p>
+        <div class="tags">
+          <span>ctf</span><span>reverse</span><span>dfir</span>
+        </div>
+      </div>
+    </a>
 
-.search{
-  width:100%;margin:25px 0 45px;padding:18px 22px;
-  border-radius:14px;background:#070707;
-  border:1px solid var(--line);color:white;font-size:1rem
-}
+    <a class="post-card" href="#">
+      <div class="post-img knight"></div>
+      <div class="post-body">
+        <span class="post-type">CTF WRITEUPS</span>
+        <h3>KnightCTF — Writeups</h3>
+        <p>
+          Technical writeups and structured breakdowns of KnightCTF challenges
+          covering reverse engineering, crypto, and exploitation.
+        </p>
+        <div class="tags">
+          <span>ctf</span><span>reverse</span><span>crypto</span>
+        </div>
+      </div>
+    </a>
 
-.posts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+  </div>
+</section>
 
-.post-card{
-  border:1px solid var(--line);
-  border-radius:18px;overflow:hidden;
-  background:rgba(255,255,255,.03);
-  color:white;text-decoration:none;transition:.3s
-}
-.post-card:hover{transform:translateY(-6px);box-shadow:0 0 40px var(--glow)}
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="section container fade">
 
-.post-img{height:190px;background-size:cover;background-position:center}
-.post-img.nexus{background-image:url("../img/nexusctf.png")}
-.post-img.flagyard{background-image:url("../img/flagyard.png")}
-.post-img.knight{background-image:url("../img/knightctf.png")}
+  <div class="section-head">
+    <h3>ACHIEVEMENTS</h3>
+  </div>
 
-.post-body{padding:22px}
-.post-body p{color:var(--muted);line-height:1.6}
+  <div class="grid">
+    <div class="card"><div class="place">1st</div><div class="event">VoidBox CTF</div><div class="date">2025</div></div>
+    <div class="card"><div class="place">8th</div><div class="event">BuckeyeCTF</div><div class="date">2025</div></div>
+    <div class="card"><div class="place">9th</div><div class="event">0xL4ugh CTF</div><div class="date">2025</div></div>
+    <div class="card"><div class="place">8th</div><div class="event">OdysseyCTF Quals</div><div class="date">2024</div></div>
+    <div class="card"><div class="place">Top 65</div><div class="event">FlagYard Platform</div><div class="date">Global ranking</div></div>
+  </div>
 
-/* ---------------- ACHIEVEMENTS ---------------- */
+</section>
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
-.card{
-  border:1px solid var(--line);
-  border-radius:18px;padding:30px;
-  background:rgba(255,255,255,.03);
-  text-align:center;transition:.3s
-}
-.card:hover{transform:translateY(-4px);box-shadow:0 0 30px var(--glow)}
-.card h2{font-size:2.6rem;margin:0}
-.card span{font-family:monospace;color:var(--muted)}
+<footer>© 2026 Amiineecmoii — Security Research</footer>
 
-/* ---------------- FOOTER ---------------- */
-
-footer{
-  border-top:1px solid var(--line);
-  text-align:center;padding:30px;
-  color:var(--muted);font-family:monospace
-}
+<script src="./assets/js/script.js"></script>
+</body>
+</html>
