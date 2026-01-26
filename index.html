@@ -5,114 +5,159 @@
   <title>Amiineecmoii | Security Researcher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <meta name="description" content="Amiineecmoii — Reverse engineering & malware analysis security researcher.">
+  <!-- SEO -->
+  <meta name="description" content="Amiineecmoii — Security researcher focused on reverse engineering and malware analysis.">
   <meta name="author" content="Amiineecmoii">
+  <meta name="keywords" content="CTF, reverse engineering, malware analysis, security researcher">
 
+  <!-- CSS -->
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
 
-<!-- HERO -->
-<main class="hero container">
-  <div>
-    <p class="kicker">Hi, my name is</p>
-    <h1>Amiineecmoii</h1>
-    <p class="subtitle">Reverse Engineering & Malware Analysis</p>
+  <!-- HERO -->
+  <main class="hero container">
+    <div class="hero-inner">
+      <p class="kicker">Hi, my name is</p>
+      <h1>Amiineecmoii</h1>
+      <p class="subtitle">Reverse Engineering & Malware Analysis</p>
 
-    <p class="desc">
-      Security researcher focused on reverse engineering and malware analysis.
-      CTF player with <a href="https://ctftime.org/team/135426/" target="_blank">Hack@Sec</a>.
-    </p>
+      <p class="desc">
+        Security researcher focused on reverse engineering and malware analysis.
+        CTF player with
+        <a href="https://ctftime.org/team/135426/" target="_blank" rel="noreferrer">Hack@Sec</a>.
+      </p>
 
-    <div class="buttons">
-      <a class="btn primary" href="#writeups">Writeups</a>
-      <a class="btn" href="#achievements">Achievements</a>
-      <a class="btn" href="https://ctftime.org/team/135426/" target="_blank">CTFtime</a>
+      <div class="buttons">
+        <a class="btn primary" href="#writeups">Writeups</a>
+        <a class="btn" href="#achievements">Achievements</a>
+        <a class="btn" href="https://ctftime.org/team/135426/" target="_blank" rel="noreferrer">CTFtime</a>
+      </div>
     </div>
-  </div>
-</main>
+  </main>
 
-<!-- WRITEUPS -->
-<section id="writeups" class="container">
+  <!-- WRITEUPS -->
+  <section id="writeups" class="container section">
+    <div class="section-title">
+      <span>writeups</span>
+      <a class="view-all" href="https://github.com/Amiineecmoii" target="_blank" rel="noreferrer">view all →</a>
+    </div>
 
-  <div class="writeups-head">
-    <span>writeups</span>
-    <a class="view-all" href="#">view all →</a>
-  </div>
-
-  <div class="search-box">
-    <input type="text" placeholder="Search writeups by title, category, or tags...">
-  </div>
-
-  <div class="posts-grid">
-
-    <a class="post-card" href="https://github.com/Amiineecmoii/eleonoras-writeup" target="_blank">
-      <div class="post-img nexus"></div>
-      <div class="post-body">
-        <div class="post-type">CTF WRITEUP</div>
-        <h3>NexusCTF — Reversing</h3>
-        <p>
-          Deep reverse engineering writeup from NexusCTF. This challenge was
-          first-blooded by me and remained exclusively solved by me. Dive deep
-          into reversing, obfuscation, and low-level binary analysis.
-        </p>
-        <div class="tags">
-          <span>ctf</span><span>reverse</span><span>malware</span>
-        </div>
+    <div class="search-wrap">
+      <label class="search-label" for="searchInput">search</label>
+      <div class="search-box">
+        <svg class="search-ico" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 4a6 6 0 104.472 10.03l3.249 3.25 1.414-1.415-3.25-3.249A6 6 0 0010 4zm0 2a4 4 0 110 8 4 4 0 010-8z"></path>
+        </svg>
+        <input id="searchInput" type="text" placeholder="Search writeups by title, description, or tags..." />
       </div>
-    </a>
+    </div>
 
-    <a class="post-card" href="https://github.com/Amiineecmoii/FlagY-writeups" target="_blank">
-      <div class="post-img flagyard"></div>
-      <div class="post-body">
-        <div class="post-type">CTF WRITEUPS</div>
-        <h3>FlagYard — Reversing & DFIR</h3>
-        <p>
-          Collection of reversing and DFIR writeups from FlagYard challenges.
-          Have fun exploring memory forensics, malware artifacts, and deep
-          reversing techniques.
-        </p>
-        <div class="tags">
-          <span>ctf</span><span>reverse</span><span>dfir</span>
+    <div class="posts-grid" id="postsGrid">
+
+      <!-- NexusCTF -->
+      <a class="post-card"
+         href="https://github.com/Amiineecmoii/eleonoras-writeup"
+         target="_blank" rel="noreferrer"
+         data-tags="ctf reverse malware nexusctf firstblood writeup">
+        <div class="post-img nexus" aria-hidden="true"></div>
+        <div class="post-body">
+          <div class="post-type">CTF Writeup</div>
+          <h3>NexusCTF — Reversing</h3>
+          <p>
+            Deep reverse engineering writeup from NexusCTF. This challenge was first-blooded by me and
+            stayed exclusively solved by me. Click and dive into reversing, obfuscation tricks, and
+            low-level binary analysis.
+          </p>
+          <div class="tags">
+            <span>ctf</span><span>reverse</span><span>malware</span>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
 
-    <a class="post-card" href="https://github.com/Amiineecmoii/KnightCTF" target="_blank">
-      <div class="post-img knight"></div>
-      <div class="post-body">
-        <div class="post-type">CTF WRITEUPS</div>
-        <h3>KnightCTF — Writeups</h3>
-        <p>
-          Technical writeups and structured breakdowns of KnightCTF challenges
-          covering reverse engineering, crypto, and exploitation.
-        </p>
-        <div class="tags">
-          <span>ctf</span><span>reverse</span><span>crypto</span>
+      <!-- FlagYard -->
+      <a class="post-card"
+         href="https://github.com/Amiineecmoii/FlagY-writeups"
+         target="_blank" rel="noreferrer"
+         data-tags="ctf reverse dfir flagyard forensics writeup">
+        <div class="post-img flagyard" aria-hidden="true"></div>
+        <div class="post-body">
+          <div class="post-type">CTF Writeups</div>
+          <h3>FlagYard — Reversing &amp; DFIR</h3>
+          <p>
+            Reversing and DFIR writeups from FlagYard challenges. Have fun exploring memory forensics,
+            malware artifacts, disk analysis, and deep reversing techniques.
+          </p>
+          <div class="tags">
+            <span>ctf</span><span>reverse</span><span>dfir</span>
+          </div>
         </div>
+      </a>
+
+      <!-- KnightCTF -->
+      <a class="post-card"
+         href="https://github.com/Amiineecmoii/KnightCTF"
+         target="_blank" rel="noreferrer"
+         data-tags="ctf reverse crypto knightctf writeup">
+        <div class="post-img knight" aria-hidden="true"></div>
+        <div class="post-body">
+          <div class="post-type">CTF Writeups</div>
+          <h3>KnightCTF — Writeups</h3>
+          <p>
+            Technical writeups and structured breakdowns of solved challenges from KnightCTF,
+            covering reverse engineering, crypto, and exploitation-style analysis.
+          </p>
+          <div class="tags">
+            <span>ctf</span><span>reverse</span><span>crypto</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS (UNDER WRITEUPS) -->
+  <section id="achievements" class="container section">
+    <div class="section-title"><span>achievements</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="place">1st</div>
+        <div class="event">VoidBox CTF</div>
+        <div class="date">2025</div>
       </div>
-    </a>
 
-  </div>
-</section>
+      <div class="card">
+        <div class="place">8th</div>
+        <div class="event">BuckeyeCTF</div>
+        <div class="date">2025</div>
+      </div>
 
-<!-- ACHIEVEMENTS -->
-<section id="achievements" class="container">
-  <div class="section-title"><span>achievements</span></div>
+      <div class="card">
+        <div class="place">9th</div>
+        <div class="event">0xL4ugh CTF</div>
+        <div class="date">2025</div>
+      </div>
 
-  <div class="grid">
-    <div class="card"><div class="place">1st</div><div class="event">VoidBox CTF</div><div class="date">2025</div></div>
-    <div class="card"><div class="place">8th</div><div class="event">BuckeyeCTF</div><div class="date">2025</div></div>
-    <div class="card"><div class="place">9th</div><div class="event">0xL4ugh CTF</div><div class="date">2025</div></div>
-    <div class="card"><div class="place">8th</div><div class="event">OdysseyCTF Quals</div><div class="date">2024</div></div>
-    <div class="card"><div class="place">Top 65</div><div class="event">FlagYard Platform</div><div class="date">Global ranking</div></div>
-  </div>
-</section>
+      <div class="card">
+        <div class="place">8th</div>
+        <div class="event">OdysseyCTF Quals</div>
+        <div class="date">2024</div>
+      </div>
 
-<footer>
-  © 2026 Amiineecmoii — Security Research
-</footer>
+      <div class="card">
+        <div class="place">Top 65</div>
+        <div class="event">FlagYard Platform</div>
+        <div class="date">Global ranking</div>
+      </div>
+    </div>
+  </section>
 
+  <footer class="container">
+    © 2026 Amiineecmoii — Security Research
+  </footer>
+
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>
