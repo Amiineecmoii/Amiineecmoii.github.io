@@ -1,4 +1,4 @@
-// Simple fade-in animation (Leo-style base)
+// Fade-in effect (Leo-style base)
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -11,6 +11,6 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll("section, .hero").forEach(el => {
   el.style.opacity = 0;
   el.style.transform = "translateY(30px)";
-  el.style.transition = "0.8s ease";
+  el.style.transition = "0.9s ease";
   observer.observe(el);
 });
