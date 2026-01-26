@@ -255,3 +255,71 @@ footer {
   font-family: monospace;
   font-size:.85rem;
 }
+/* WRITEUPS */
+
+.view-all {
+  margin-left:auto;
+  font-size:.85rem;
+  color:var(--muted);
+  text-decoration:none;
+}
+
+.posts-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:26px;
+  margin-top:30px;
+}
+
+.post-card {
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.02);
+  text-decoration:none;
+  color:white;
+  transition:.3s ease;
+  display:flex;
+  flex-direction:column;
+}
+
+.post-card:hover {
+  transform:translateY(-6px);
+  border-color:rgba(255,255,255,0.3);
+  box-shadow:0 0 50px var(--glow);
+}
+
+.post-img {
+  height:190px;
+  background-size:cover;
+  background-position:center;
+}
+
+.post-img.nexus { background-image:url("../img/nexusctf.png"); }
+.post-img.flagyard { background-image:url("../img/flagyard.png"); }
+.post-img.knight { background-image:url("../img/knightctf.png"); }
+
+.post-body { padding:22px; }
+
+.post-type {
+  font-family:monospace;
+  font-size:.7rem;
+  color:var(--muted);
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.tags {
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.tags span {
+  font-size:.7rem;
+  padding:4px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:var(--muted);
+}
+
