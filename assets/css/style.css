@@ -188,26 +188,27 @@ section { padding:110px 0; }
 }
 
 .post-img {
-  height:180px;
+  height:190px;
   background-size:cover;
   background-position:center;
-  filter:brightness(0.85);
+  filter:brightness(0.75);
 }
 
+/* REAL IMAGES */
 .post-img.nexus {
-  background:linear-gradient(135deg,#0f0f0f,#2b0000);
+  background-image: url("../img/nexusctf.png");
 }
 
 .post-img.flagyard {
-  background:linear-gradient(135deg,#020024,#090979,#00d4ff);
+  background-image: url("../img/flagyard.png");
 }
 
 .post-img.knight {
-  background:linear-gradient(135deg,#000000,#1a1a1a,#3a3a3a);
+  background-image: url("../img/knightctf.png");
 }
 
 .post-body {
-  padding:20px;
+  padding:22px;
 }
 
 .post-date {
@@ -218,14 +219,14 @@ section { padding:110px 0; }
 }
 
 .post-body h3 {
-  margin:0 0 8px;
+  margin:0 0 10px;
   font-size:1.1rem;
 }
 
 .post-body p {
   color:var(--muted);
   font-size:.9rem;
-  line-height:1.5;
+  line-height:1.6;
 }
 
 .tags {
