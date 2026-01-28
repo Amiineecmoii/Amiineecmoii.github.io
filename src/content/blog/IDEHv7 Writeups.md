@@ -808,5 +808,176 @@ if __name__ == "__main__":
  echo -n "IDEH{I_h3Ckin_L0ooOv3_VM5}" | ./chall
 # oui?
 # OUIOUIOUIOUIOUIOUIOUIOUIOUIOUIOUIOUIOUIOUIOUIOUIOUIOUI
+```
+
+
+## IDEH  — Deception.exe
+
+**Category:** Malware Analysis / Reverse Engineering / Misc  
+
+**Flag format:** `IDEH{...}`  
+
+**Binary:** `Deception.exe`
+
+
+## 📎 Attachments
+[Deception.exe.zip](/attatchement/IDEHv7/Deception.exe.zip)
+---
+
+## 1) Executive Summary
+
+Our SOC team detected a suspicious Windows executable named `Deception.exe`.  
+Static analysis revealed that the binary uses process-injection related APIs and contains an embedded encrypted payload.
+
+By reversing the binary, we identified an **RC4 decryption routine** used to decrypt a hidden buffer stored in the `.rdata` section. Re-implementing this routine allowed us to recover the flag.
+
+---
+
+## Step 1 — Initial Triage
+
+Identify the file:
+
+```bash
+file Deception.exe
+
 
 ```
+
+Output:
+
+```javascript
+PE32+ executable (console) x86-64, for MS Windows
+```
+
+Hash for tracking:
+
+```bash
+sha256sum Deception.exe
+```
+
+```bash
+50ecfaaefcd8b5b169123618169d9a0696dcbfa81f7991edb93bbb4128d676f8
+```
+
+
+
+PE inspection (DIE / PE-Studio / CFF Explorer):
+
+>Architecture: x64
+
+>Compiler: MinGW (GCC)
+
+>19 sections
+
+>Contains `.debug_*` DWARF sections
+
+>Unsigned binary
+
+
+## Step 2 — Suspicious Indicators
+
+Imports analysis:
+
+```bash
+rabin2 -i Deception.exe
+```
+
+>`Interesting APIs:`
+
+>`CreateProcessA`
+
+>`ReadProcessMemory`
+
+>`WriteProcessMemory`
+
+>`VirtualProtect`
+
+>`VirtualQuery`
+
+>`NtQueryInformationProcess`
+
+>`ResumeThread`
+
+**Strong indicators of process hollowing / injection malware.**
+
+Strings:
+```bash
+strings Deception.exe
+```
+
+Notable strings:
+
+```perl
+C:\Windows\System32\WerFault.exe
+-u -p %d -s %d
+```
+
+**Masquerading as Windows Error Reporting.**
+
+## Step 3 — Reverse Engineering
+
+Loaded into IDA.
+
+Main findings:
+
+>`main()` calls a function initializing a 256-byte state array.
+
+>Performs byte swaps and modular indexing.
+
+>XORs a buffer with a generated keystream.
+
+This exactly matches the RC4 algorithm (KSA + PRGA).
+
+## Step 4 — Extracting Key and Ciphertext
+
+From `.rdata,` referenced directly by the RC4 function:
+
+```bash
+RC4 Key (9 bytes)
+23 82 71 87 12 23 12 FF EE
+```
+
+Encrypted Buffer (27 bytes)
+
+```bash
+13 39 97 51 CA 44 49 D0 4B 89 10 F0 61 8A 27 74
+50 F9 B6 52 9C 26 1E B4 E2 29 ED
+```
+
+## Step 5 — Decryption Script
+
+```python
+def rc4(key, data):
+    S = list(range(256))
+    j = 0
+
+    # KSA
+    for i in range(256):
+        j = (j + S[i] + key[i % len(key)]) % 256
+        S[i], S[j] = S[j], S[i]
+
+    # PRGA
+    i = j = 0
+    out = bytearray()
+    for b in data:
+        i = (i + 1) % 256
+        j = (j + S[i]) % 256
+        S[i], S[j] = S[j], S[i]
+        out.append(b ^ S[(S[i] + S[j]) % 256])
+
+    return bytes(out)
+
+
+key = bytes.fromhex("23827187122312ffee")
+ct  = bytes.fromhex("13399751ca4449d04b8910f0618a277450f9b6529c261eb4e229ed")
+
+print(rc4(key, ct))
+```
+
+Output:
+
+```bash
+IDEH{D3c3pt10n_h1d35_tru7h}
+```
+
+have fun ... always ON TOP?!
