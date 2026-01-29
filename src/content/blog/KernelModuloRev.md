@@ -257,7 +257,7 @@ Static analysis
 
 >Binary Ninja
 
->and the best one is [dogbolt](https://https://dogbolt.org/)  ***lmaaaaaaaaao***
+>and the best one is [dogbolt](https://dogbolt.org/)  ***lmaaaaaaaaao***
 
 Load drivers with symbols:
 
