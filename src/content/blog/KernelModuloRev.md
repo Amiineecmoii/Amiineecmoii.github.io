@@ -1,7 +1,7 @@
 ---
-title: 'KnightCTF Writeups'
+title: 'Win Kernel Modulo Reversing #1'
 description: 'having fun'
-pubDate: 'Jan 20 2026'
+pubDate: 'Jan 29 2026'
 cover: /images/kernelrev.png
 categories: ['Blog']
 tags: ['rev']
