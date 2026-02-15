@@ -1,6 +1,7 @@
 ---
 title: '0xfunCTF writeup'
 pubDate: 'Feb 14 2026'
+description: Full technical writeup of challenges solved during 0xFUN CTF including forensics, rev and misc ....
 cover: /images/0xfunCTF.png
 categories: ['Blog', 'Writeup']
 tags: ['rev', 'crypto', 'misc', 'osint', 'forensics']
